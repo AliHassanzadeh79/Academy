@@ -46,13 +46,13 @@
       <div
         class="box flex-y"
         style="
-            {% if forloop.counter|divisibleby:3 %}
-            background-color: #99CCFF; <!-- Light Blue Background -->
-            {% elif forloop.counter|add:1|divisibleby:3 %}
-            background-color: #FFFF99; <!-- Light Yellow Background -->
-            {% elif forloop.counter0|divisibleby:3 %}
-            background-color: #FFCC99; <!-- Light Orange Background --> 
-            {% endif %}"
+        {% if forloop.counter0|divisibleby:3 %}
+        background-color: #FFCC99; <!-- Light Orange Background --> 
+        {% elif forloop.counter|add:1|divisibleby:3 %}
+        background-color: #FFFF99; <!-- Light Yellow Background -->
+        {% elif forloop.counter|divisibleby:3 %}
+        background-color: #99CCFF; <!-- Light Blue Background -->
+        {% endif %}"
       >
         <p>{{ item.name }}</p>
       </div>
