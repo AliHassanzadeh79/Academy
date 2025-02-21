@@ -12,21 +12,28 @@ courses = [
 ]
 
 def course_list(request):
+    response = "<pre style='font-family: Tahoma, Arial, sans-serif; font-size: 14px;'>"
     for course in courses:
-        url = reverse("course-detail" )
-        response =f"<pre style='font-family: Tahoma, Arial, sans-serif; font-size: 14px;'>" + ''.join(
-        f"id: {course['id']}{' ' * (13 - len(str(course['id'])))} , "
-        f"name:<a href='{url}?id={course['id']}'>{course['name']}</a>{' ' * (24 - len(course['name']))} , "
-        f"capacity: {course['capacity']}{' ' * (10 - len(str(course['capacity'])))} , "
-        f"sessions: {course['sessions']}{' ' * (10 - len(str(course['sessions'])))} , "
-        f"schedule: {', '.join(course['schedule']['days'])} ({course['schedule']['time']})<br/>"
-        for course in courses
-    ) + '</pre>'
+        url = reverse("course-detail" , args=[course['id']])
+        response += f"id: {course['id']}{' ' * (13 - len(str(course['id'])))} , "
+        response += f"name:<a href='{url}'>{course['name']}</a>{' ' * (24 - len(course['name']))} , "
+        response += f"capacity: {course['capacity']}{' ' * (10 - len(str(course['capacity'])))} , "
+        response += f"sessions: {course['sessions']}{' ' * (10 - len(str(course['sessions'])))} , "
+        response += f"schedule: {', '.join(course['schedule']['days'])} ({course['schedule']['time']})<br/>"
+    response += '</pre>'
     return HttpResponse(response)
 
 def standard_course_list(request):
-    return render(request,"course/course_list.html" , context={"courses":courses})
-
+    filter_by_name = []
+    name = request.GET.get('name','')
+    if name == '':
+        return render(request,"course/course_list.html" , context={"courses":courses})
+    else:
+        for course in courses:
+            if name.lower() in course['name'].lower():
+                filter_by_name.append(course)
+        return render(request, "course/course_list.html" , context={"courses":filter_by_name})
+    
 def search (request , name):
     filter_list = [] 
     response = '<pre style="font-family: Tahoma, Arial, sans-serif; font-size: 14px;">'
@@ -43,8 +50,9 @@ def search (request , name):
     # return HttpResponse(response)
     return render(request,"course/course_list.html" , context={"courses":filter_list})
 
-def detail (request):
-    filter_id = request.GET.get('id','')
+def detail (request , id):
+    # filter_id = request.GET.get('id','')
+    filter_id = id
     if filter_id != '':
         for course in courses:
             if course['id'] == int(filter_id) :
