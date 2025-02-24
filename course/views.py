@@ -32,7 +32,7 @@ def standard_course_list(request):
         for course in courses:
             if name.lower() in course['name'].lower():
                 filter_by_name.append(course)
-        return render(request, "course/course_list.html" , context={"courses":filter_by_name})
+        return render(request, "course/course_list.html" , context={"courses":filter_by_name , "filter_name":name})
     
 def search (request , name):
     filter_list = [] 

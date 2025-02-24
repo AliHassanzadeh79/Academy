@@ -43,9 +43,9 @@ nav div > * {
 }
 .flex-y {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .row {
     display: flex;
@@ -67,8 +67,31 @@ nav div > * {
     color: red;
     cursor: pointer;
 }
-.detail-box{
+/* detail_box.html */
+.detail-box {
     background-color: #fff;
-    color:yellow;
-    cursor: pointer;
+    box-shadow: 2px 2px 10px 0px gray;
+    padding: 20px;
+    width: 800px;
+    height: 300px;
+}
+.detail-box .up{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+.detail-box .up > div {
+    margin: 10px;
+    text-align: center;
+    text-shadow: 3px 3px 10px blueviolet;
+}
+.detail-box .up img {
+    border-radius: 10px;
+    width: 270px;
+    height: 200px;
+}
+.detail-box .down {
+    margin: 5px;
+    font-size: larger;
 }
