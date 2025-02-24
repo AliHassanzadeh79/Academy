@@ -1,0 +1,13 @@
+<a
+class="box flex-y"
+style="
+{% if forloop.counter0|divisibleby:3 %}
+background-color: #FFCC99; <!-- Light Orange Background --> 
+{% elif forloop.counter|add:1|divisibleby:3 %}
+background-color: #FFFF99; <!-- Light Yellow Background -->
+{% elif forloop.counter|divisibleby:3 %}
+background-color: #99CCFF; <!-- Light Blue Background -->
+{% endif %}"
+href="{% url 'course-detail' item.id %}">
+  <p>{{ item.name }}</p>
+</a>

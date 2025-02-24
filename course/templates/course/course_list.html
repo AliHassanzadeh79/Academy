@@ -7,53 +7,12 @@
 <a href="{% url "course-list" %}" style="color: red;">Courses</a>
 {% endblock navbar %}
 
-{% block style %}
-.flex-y {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-.box {
-  border: 2px solid black;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px 0px gray;
-  padding: 20px 0;
-  margin: 10px;
-  width: 300px;
-  height: 60px;
-}
-.box:hover {
-  opacity: 0.6;
-  color: red;
-  cursor: pointer;
-}
-{% endblock style %}
-
 {% block content %}
   {% for item in courses %}
     {% if forloop.counter0|divisibleby:3 %}
       <div class="row">
     {% endif %}
-          <a
-          class="box flex-y"
-          style="
-          {% if forloop.counter0|divisibleby:3 %}
-          background-color: #FFCC99; <!-- Light Orange Background --> 
-          {% elif forloop.counter|add:1|divisibleby:3 %}
-          background-color: #FFFF99; <!-- Light Yellow Background -->
-          {% elif forloop.counter|divisibleby:3 %}
-          background-color: #99CCFF; <!-- Light Blue Background -->
-          {% endif %}"
-          href="{% url 'course-detail' item.id %}">
-            <p>{{ item.name }}</p>
-          </a>
+        {% include "course/components/course_box.html" %}
     {% if forloop.counter|divisibleby:3 %}
       </div>
     {% endif %}

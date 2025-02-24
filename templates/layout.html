@@ -1,49 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'course/style.css' %}" />
     <title>{% block title%} مقدار پیش فرض {% endblock title %}</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      a{
-        text-decoration: none;
-        color: #444;
-      }
-      body {
-        margin: 0px;
-        height: 100%;
-        direction: ltr;
-      }
-      .content{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      nav{
-        position: fixed;
-        width: 100%;
-        background-color: #eee;
-        padding: 15px;
-        box-shadow: 2px 4px 6px rgba(0,0,0,0.3);
-        font-size: 15px;
-      }
-      nav > * {
-        margin: 10px;
-        font-weight: bold;
-      }
-      {% block style %} مقدار پیش فرض {% endblock style %}
-    </style>
   </head>
   <body>
     <nav>
-      <a href="#">Home</a>
-      {% block navbar %} مقدار پیش فرض {% endblock navbar %}
+      <div class="left-nav">
+        <a href="#">Home</a>
+        {% block navbar %} مقدار پیش فرض {% endblock navbar %}
+      </div>
+      <div class="right-nav">Elia Academy</div>
     </nav>
-    <div class="content">{% block content%} مقدار پیش فرض {% endblock content %}</div>
+    <div class="content">
+      {% block content%} مقدار پیش فرض {% endblock content %}
+    </div>
   </body>
 </html>

@@ -3,12 +3,12 @@ from django.http import HttpResponse
 from django.urls import reverse
 # Create your views here.
 courses = [
-    {"id": 1, "name": "Python", "capacity": 30, "sessions": 24, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "10:00-12:00"}},
-    {"id": 2, "name": "JavaScript", "capacity": 25, "sessions": 30, "schedule": {"days": ["Sunday", "Tuesday", "Thursday"], "time": "14:00-16:00"}},
-    {"id": 3, "name": "HTML", "capacity": 20, "sessions": 18, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "16:00-14:00"}},
-    {"id": 4, "name": "Django", "capacity": 15, "sessions": 36, "schedule": {"days": ["Sunday", "Tuesday", "Thursday"], "time": "16:00-18:00"}},
-    {"id": 5, "name": "CCNA", "capacity": 20, "sessions": 18, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "08:00-10:00"}},
-    {"id": 6, "name": "CCNP", "capacity": 12, "sessions": 15, "schedule": {"days": ["Saturday", "Tuesday"], "time": "09:00-11:00"}},
+    {"id": 1, "name": "Python", "capacity": 30, "sessions": 24, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "10:00-12:00"}, "img_name": "python.jpg", "description": "Learn programming with Python, a versatile and easy-to-use language."},
+    {"id": 2, "name": "JavaScript", "capacity": 25, "sessions": 30, "schedule": {"days": ["Sunday", "Tuesday", "Thursday"], "time": "14:00-16:00"}, "img_name": "javascript.jpg", "description": "Master JavaScript, the language for web development and dynamic interactions."},
+    {"id": 3, "name": "HTML", "capacity": 20, "sessions": 18, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "16:00-14:00"}, "img_name": "html.jpg", "description": "Learn HTML, the markup language for structuring web pages."},
+    {"id": 4, "name": "Django", "capacity": 15, "sessions": 36, "schedule": {"days": ["Sunday", "Tuesday", "Thursday"], "time": "16:00-18:00"}, "img_name": "django.jpg", "description": "Learn Django, a framework for building web applications with Python."},
+    {"id": 5, "name": "CCNA", "capacity": 20, "sessions": 18, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "08:00-10:00"}, "img_name": "ccna.jpg", "description": "Cisco CCNA course to learn networking fundamentals."},
+    {"id": 6, "name": "CCNP", "capacity": 12, "sessions": 15, "schedule": {"days": ["Saturday", "Tuesday"], "time": "09:00-11:00"}, "img_name": "ccnp.jpg", "description": "Advanced Cisco CCNP course for deeper network specialization."}
 ]
 
 def course_list(request):

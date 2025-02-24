@@ -10,13 +10,5 @@
 {% endblock navbar %}
 
 {% block content %}
-<center>
-  <h1>{{id}} : {{name}}</h1>
-  <h4>Number of class capacity : {{capacity}}</h4>
-  <h4>Number of sessions : {{sessions}}</h4>
-  <h4>
-    Weekly schadule : ({{schedule.time}}) {% for day in schedule.days %}
-    {{day}} {% if not forloop.last %},{% endif%} {%endfor%}
-  </h4>
-</center>
+  {% include "course/components/detail_box.html" %}
 {% endblock content %}
