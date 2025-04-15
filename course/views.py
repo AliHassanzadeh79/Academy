@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse
+import re
 # Create your views here.
 courses = [
     {"id": 1, "name": "Python", "capacity": 30, "sessions": 24, "schedule": {"days": ["Saturday", "Monday", "Wednesday"], "time": "10:00-12:00"}, "img_name": "python.jpg", "description": "Learn programming with Python, a versatile and easy-to-use language."},
@@ -27,19 +28,22 @@ def standard_course_list(request):
     filter_by_name = []
     name = request.GET.get('name','')
     if name == '':
-        return render(request,"course/course_list.html" , context={"courses":courses})
+        filter_by_name.extend(courses)
     else:
+        # searching
         for course in courses:
             if name.lower() in course['name'].lower():
                 filter_by_name.append(course)
-        return render(request, "course/course_list.html" , context={"courses":filter_by_name , "filter_name":name})
+            elif name.lower() in course['description'].lower():
+                filter_by_name.append(course)
+    return render(request, "course/course_list.html" , context={"courses":filter_by_name , "filter_name":name})
     
-def search (request , name):
-    filter_list = [] 
-    response = '<pre style="font-family: Tahoma, Arial, sans-serif; font-size: 14px;">'
-    for course in courses:
-        if name.lower() in course["name"].lower():
-            filter_list.append(course)
+# def search (request , name):
+    # filter_list = [] 
+    # response = '<pre style="font-family: Tahoma, Arial, sans-serif; font-size: 14px;">'
+    # for course in courses:
+    #     if name.lower() in course["name"].lower():
+    #         filter_list.append(course)
     #         response = response +'<a href="#">' + ''.join(
     #         f"id: {course['id']}{' ' * (13 - len(str(course['id'])))} , "
     #         f"name: {course['name']}{' ' * (24 - len(course['name']))} , "
@@ -48,15 +52,29 @@ def search (request , name):
     #         f"schedule: {', '.join(course['schedule']['days'])} ({course['schedule']['time']})</a><br/><br/>")
     # response = response + '</pre>'
     # return HttpResponse(response)
-    return render(request,"course/course_list.html" , context={"courses":filter_list})
+    # return render(request,"course/course_list.html" , context={"courses":filter_list})
 
-def detail (request , id):
-    # filter_id = request.GET.get('id','')
+# def detail (request , id):
+#     # filter_id = request.GET.get('id','')
+#     filter_id = id
+#     if filter_id != '':
+#         for course in courses:
+#             if course['id'] == int(filter_id) :
+#                 filter_name = request.GET.get('filter_name','')
+#                 context = course
+#                 context.update({"filter_name":filter_name})
+#                 return render(request , "course/detail.html" , context=context)   
+#     return render(request , "course/404.html")
+
+def detail(request, id):
     filter_id = id
     if filter_id != '':
         for course in courses:
-            if course['id'] == int(filter_id) :
-                return render(request , "course/detail.html" , context=course)   
-    return render(request , "course/404.html")
-
-
+            if course['id'] == int(filter_id):
+                context = course.copy()
+                filter_name = request.GET.get('filter_name', '')
+                if filter_name != "":
+                    pattern = re.compile(re.escape(filter_name), re.IGNORECASE) # re.compile('P', re.IGNORECASE)
+                    context['description'] = pattern.sub(lambda match: f'<mark>{match.group(0)}</mark>', context['description'])
+                return render(request, "course/detail.html", context=context)
+    return render(request, "course/404.html")

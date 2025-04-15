@@ -8,6 +8,6 @@ background-color: #FFFF99; <!-- Light Yellow Background -->
 {% elif forloop.counter|divisibleby:3 %}
 background-color: #99CCFF; <!-- Light Blue Background -->
 {% endif %}"
-href="{% url 'course-detail' item.id %}">
+href="{% url 'course-detail' item.id %}?filter_name={{ filter_name|default:""  }}">
   <p>{{ item.name }}</p>
 </a>
