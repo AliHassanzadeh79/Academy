@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'title';
+    src: url("../fonts/Montserrat-SemiBold.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'text';
+    src: url("../fonts/OpenSans-VariableFont_wdth\,wght.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'navbar';
+    src: url("../fonts/Roboto-Light.ttf") format("truetype");
+}
+
+body{
+    font-family: text;
+}
+
+nav{
+    font-family: navbar;
+}
+
+.box{
+    font-family: title;
+}
